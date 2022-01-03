@@ -6,12 +6,12 @@ import (
 )
 
 func main() {
-	var numCalcsCreated int
+	var numCalcCreated int
 	var m sync.Mutex
 	calcPool := &sync.Pool{
 		New: func() interface{} {
 			m.Lock()
-			numCalcsCreated += 1
+			numCalcCreated += 1
 			m.Unlock()
 			mem := make([]byte, 1024)
 			return &mem // <1>
@@ -40,5 +40,5 @@ func main() {
 	}
 
 	wg.Wait()
-	fmt.Printf("%d calculators were created.", numCalcsCreated)
+	fmt.Printf("%d calculators were created.", numCalcCreated)
 }
